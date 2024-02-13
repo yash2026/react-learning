@@ -5,6 +5,9 @@ import Button from "../UI/Button";
 import ErrorModal from "../UI/ErrorModal";
 
 const AddUser = (props) => {
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
   const [username, setUsername] = useState("");
   const [age, setAge] = useState("");
   const [error, setError] = useState();
@@ -57,6 +60,7 @@ const AddUser = (props) => {
             id="username"
             value={username}
             onChange={usernameChangeHandler}
+            ref={nameInputRef}
           ></input>
           <label htmlFor="age">Age (Years)</label>
           <input
@@ -64,6 +68,7 @@ const AddUser = (props) => {
             id="age"
             value={age}
             onChange={ageChangeHandler}
+            ref={ageInputRef}
           ></input>
           <Button type="submit">Add User</Button>
         </form>
