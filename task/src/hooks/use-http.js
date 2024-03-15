@@ -1,10 +1,10 @@
-import React from "react";
+import { useState, useCallback } from "react";
 
-const usehttp = (requestConfig, applyData) => {
+const useHttp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchTasks = async (taskText) => {
+  const sendRequest = useCallback(async (requestConfig, applyData) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -24,12 +24,12 @@ const usehttp = (requestConfig, applyData) => {
       setError(err.message || "Something went wrong!");
     }
     setIsLoading(false);
-  };
+  }, []);
   return {
-    isLoading: isLoading,
-    error: error,
-    sendRequest: sendRequest,
+    isLoading,
+    error,
+    sendRequest,
   };
 };
 
-export default usehttp;
+export default useHttp;
