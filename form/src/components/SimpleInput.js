@@ -2,15 +2,21 @@ import { useState } from "react";
 const SimpleInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
   const [enteredNametouched, setEnteredNameTouched] = useState(false);
+  let formIsValid = false;
 
   const enteredNameValid = enteredName.trim() !== "";
   const nameInputInvalid = !enteredNameValid && enteredNametouched;
 
-  useEffect(() => {
-    if (enteredNameValid) {
-      console.log("Yash is great");
-    }
-  }, [enteredNameValid]);
+  if (enteredNameValid) {
+    formIsValid = true;
+  }
+  // useEffect(() => {
+  //   if (enteredNameValid) {
+  //     setFormValid(true);
+  //   } else {
+  //     setFormValid(false);
+  //   }
+  // }, [enteredNameValid]);
   const nameInputHandler = (e) => {
     setEnteredName(e.target.value);
   };
@@ -50,7 +56,7 @@ const SimpleInput = (props) => {
         )}
       </div>
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
