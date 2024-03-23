@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
   useEffect(() => {
     const fetchMeals = async () => {
+      setLoading(true);
       const response = await fetch(
         "https://form-af3f0-default-rtdb.firebaseio.com/meals.json"
       );
@@ -23,10 +26,19 @@ const AvailableMeals = () => {
       }
 
       setMeals(loadMeals);
+      setLoading(false);
     };
 
     fetchMeals();
   }, []);
+
+  if (isLoading) {
+    return (
+      <section className={classes.MealsLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   const mealsList = meals.map((meal) => (
     <MealItem
